@@ -24,17 +24,22 @@ def processRequest( json, data, headers, params ):
             result = response.json()
 
         else:
+            print(retries, _maxNumRetries)
             print( "Error code: %d" % (response.status_code) )
-            print( "Message: %s" % (response.json()['error']['message']))
+            print( "Message: %s" % (response.json()))
 
-            if retries <= _maxNumRetries:
+            if retries < _maxNumRetries:
+                time.sleep(100)
                 retries += 1
                 continue
+            else:
+                break
         
         break
 
     return result
 
+'''
 # URL direction to image
 urlImage = 'https://oxfordportal.blob.core.windows.net/vision/Analysis/3.jpg'
 
@@ -46,7 +51,23 @@ headers['Ocp-Apim-Subscription-Key'] = _key
 
 json = { 'url' : urlImage }
 data = None
+'''
+
+'''
+# Load raw image file into memory
+pathToFileInDisk = r'C:\Temp\untitled.png'
+with open ( pathToFileInDisk, 'rb' ) as f:
+    data = f.read()
+
+params = { 'visualFeatures' : 'Categories, Tags, Description, Faces, ImageType, Color, Adult' }
+
+headers = dict()
+headers['Content-Type'] = 'application/octet-stream'
+headers['Ocp-Apim-Subscription-Key'] = _key
+
+json = None
 
 result = processRequest( json, data, headers, params )
+'''
 
 print(result)
