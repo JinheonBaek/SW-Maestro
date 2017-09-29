@@ -26,14 +26,12 @@ def processRequest( json, data, headers, params ):
         else:
             print(retries, _maxNumRetries)
             print( "Error code: %d" % (response.status_code) )
-            print( "Message: %s" % (response.json()))
+            print( "Error Message: %s" % (response.json()))
 
             if retries < _maxNumRetries:
                 time.sleep(100)
                 retries += 1
                 continue
-            else:
-                break
         
         break
 
@@ -53,7 +51,6 @@ json = { 'url' : urlImage }
 data = None
 '''
 
-'''
 # Load raw image file into memory
 pathToFileInDisk = r'C:\Temp\untitled.png'
 with open ( pathToFileInDisk, 'rb' ) as f:
@@ -68,6 +65,7 @@ headers['Ocp-Apim-Subscription-Key'] = _key
 json = None
 
 result = processRequest( json, data, headers, params )
-'''
 
+
+# print result
 print(result)
