@@ -245,7 +245,6 @@ def detect_scenes(cap, scene_manager, start_frame,
                 perf_last_framecount = frames_read
                 print("[PySceneDetect] Current Processing Speed: %3.1f FPS" % perf_curr_rate)
         # save images on scene cuts/breaks if requested (scaled if using -df)
-        #if scene_manager.save_images:
         if scene_manager.save_images and cut_found:
             save_preview_images(
                 image_path_prefix, im_cap, last_frame, len(scene_manager.scene_list))
@@ -270,12 +269,12 @@ def save_preview_images(image_path_prefix, im_curr, im_last, num_scenes):
         im_last: The last frame of the previous scene.
         num_scenes: The index of the current/new scene (the IN frame).
     """
-    
+
     # Save the last/previous frame, or the OUT frame of the last scene.
-    output_name = '%s.Scene-%03d-OUT.jpg' % (image_path_prefix, num_scenes)
+    output_name = 'image\%s.Scene-%03d-OUT.jpg' % (image_path_prefix, num_scenes)
     cv2.imwrite(output_name, im_last)
     # Save the current frame, or the IN frame of the new scene.
-    output_name = '%s.Scene-%03d-IN.jpg' % (image_path_prefix, num_scenes+1)
+    output_name = 'image\%s.Scene-%03d-IN.jpg' % (image_path_prefix, num_scenes+1)
     cv2.imwrite(output_name, im_curr)
 
 def main():
