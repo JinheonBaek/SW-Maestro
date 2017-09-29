@@ -247,7 +247,7 @@ def detect_scenes(cap, scene_manager, start_frame,
         # save images on scene cuts/breaks if requested (scaled if using -df)
         if scene_manager.save_images and cut_found:
             save_preview_images(
-                image_path_prefix, im_cap, last_frame, len(scene_manager.scene_list))
+                'image\\' + image_path_prefix, im_cap, last_frame, len(scene_manager.scene_list))
 
         del last_frame
         last_frame = im_cap.copy()
@@ -271,10 +271,10 @@ def save_preview_images(image_path_prefix, im_curr, im_last, num_scenes):
     """
 
     # Save the last/previous frame, or the OUT frame of the last scene.
-    output_name = 'image\%s.Scene-%03d-OUT.jpg' % (image_path_prefix, num_scenes)
+    output_name = '%s.Scene-%03d-OUT.jpg' % (image_path_prefix, num_scenes)
     cv2.imwrite(output_name, im_last)
     # Save the current frame, or the IN frame of the new scene.
-    output_name = 'image\%s.Scene-%03d-IN.jpg' % (image_path_prefix, num_scenes+1)
+    output_name = '%s.Scene-%03d-IN.jpg' % (image_path_prefix, num_scenes+1)
     cv2.imwrite(output_name, im_curr)
 
 def main():
