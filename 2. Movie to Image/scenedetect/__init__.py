@@ -170,6 +170,9 @@ def detect_scenes(cap, scene_manager, start_frame,
     frame_metrics = {}
     last_frame = None       # Holds previous frame if needed for save_images.
 
+    # set save image path and name
+    img_name = 0
+
     perf_show = True
     perf_last_update_time = time.time()
     perf_last_framecount = 0
@@ -206,18 +209,23 @@ def detect_scenes(cap, scene_manager, start_frame,
                     break
                 frames_read += 1
 
+        # Read frame through cap.read() function
         (ret_val, im_cap) = cap.read()
         if not ret_val:
             break
+
         if not frames_read in frame_metrics:
             frame_metrics[frames_read] = dict()
+
         im_scaled = im_cap
         if scene_manager.downscale_factor > 0:
             im_scaled = im_cap[::scene_manager.downscale_factor,::scene_manager.downscale_factor,:]
+        
         cut_found = False
         for detector in scene_manager.detector_list:
             cut_found = detector.process_frame(frames_read, im_scaled,
                 frame_metrics, scene_manager.scene_list) or cut_found
+
         if scene_manager.stats_writer:
             if not len(stats_file_keys) > 0:
                 stats_file_keys = frame_metrics[frames_read].keys()
@@ -229,8 +237,15 @@ def detect_scenes(cap, scene_manager, start_frame,
                     [str(frames_read)] +
                     [scenedetect.timecodes.frame_to_timecode(frames_read, video_fps)] +
                     [str(frame_metrics[frames_read][metric]) for metric in stats_file_keys])
+        
         frames_read += 1
         frames_processed += 1
+        img_name += 1
+
+        # Save video frame image
+        if True:
+            save_image(len(scene_manager.scene_list) + 1, img_name, im_cap)
+
         # periodically show processing speed/performance if requested
         if not scene_manager.quiet_mode and perf_show:
             curr_time = time.time()
@@ -244,38 +259,28 @@ def detect_scenes(cap, scene_manager, start_frame,
                 perf_last_update_time = curr_time
                 perf_last_framecount = frames_read
                 print("[PySceneDetect] Current Processing Speed: %3.1f FPS" % perf_curr_rate)
+
         # save images on scene cuts/breaks if requested (scaled if using -df)
         if scene_manager.save_images and cut_found:
-            save_preview_images(
-                'image\\' + image_path_prefix, im_cap, last_frame, len(scene_manager.scene_list))
+            img_name = 0
 
         del last_frame
         last_frame = im_cap.copy()
+
     # perform any post-processing required by the detectors being used
     for detector in scene_manager.detector_list:
-        detector.post_process(scene_manager.scene_list, frames_read)
+        detector.post_process(scene_manager.scene_list + 1, frames_read)
 
     if start_frame.get_frames() > 0:
         frames_read -= start_frame.get_frames()
     return (frames_read, frames_processed)
 
-
-def save_preview_images(image_path_prefix, im_curr, im_last, num_scenes):
-    """Called when a scene break occurs to save an image of the frames.
-
-    Args:
-        image_path_prefix: Prefix to include in image path.
-        im_curr: The current frame image for the first frame in the new scene.
-        im_last: The last frame of the previous scene.
-        num_scenes: The index of the current/new scene (the IN frame).
-    """
-
-    # Save the last/previous frame, or the OUT frame of the last scene.
-    output_name = '%s.Scene-%03d-OUT.jpg' % (image_path_prefix, num_scenes)
-    cv2.imwrite(output_name, im_last)
-    # Save the current frame, or the IN frame of the new scene.
-    output_name = '%s.Scene-%03d-IN.jpg' % (image_path_prefix, num_scenes+1)
-    cv2.imwrite(output_name, im_curr)
+def save_image(img_dir_path, img_name, im_cap):
+    if not os.path.exists(str(img_dir_path)):
+        os.makedirs(str(img_dir_path))
+    image_path_prefix = str(img_dir_path) + '\\'
+    output_name = '%sScene%03d-%03d.jpg' % (image_path_prefix, img_dir_path, img_name)
+    cv2.imwrite(output_name, im_cap)
 
 def main():
     """Entry point for running PySceneDetect as a program.

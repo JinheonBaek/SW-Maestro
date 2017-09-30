@@ -71,7 +71,7 @@ headers	1. Cognitive API/vision.py	/^headers = dict()$/;"	kind:variable	line:61
 int_type_check	2. Movie to Image/scenedetect/cli.py	/^def int_type_check(min_val, max_val = None, metavar = None):$/;"	kind:function	line:98
 json	1. Cognitive API/vision.py	/^json = None$/;"	kind:variable	line:65
 main	2. Movie to Image/api_test.py	/^def main():$/;"	kind:function	line:18
-main	2. Movie to Image/scenedetect/__init__.py	/^def main():$/;"	kind:function	line:281
+main	2. Movie to Image/scenedetect/__init__.py	/^def main():$/;"	kind:function	line:303
 manager	2. Movie to Image/api_test.py	/^import scenedetect.manager$/;"	kind:namespace	line:15
 manager	2. Movie to Image/scenedetect/__init__.py	/^import scenedetect.manager$/;"	kind:namespace	line:42
 manager.py	2. Movie to Image/scenedetect/manager.py	1;"	kind:file	line:1
@@ -79,7 +79,7 @@ math	2. Movie to Image/scenedetect/timecodes.py	/^import math$/;"	kind:namespace
 numpy	2. Movie to Image/scenedetect/__init__.py	/^import numpy$/;"	kind:namespace	line:51
 numpy	2. Movie to Image/scenedetect/detectors.py	/^import numpy$/;"	kind:namespace	line:32
 os	2. Movie to Image/scenedetect/__init__.py	/^import os$/;"	kind:namespace	line:32
-output_scene_list	2. Movie to Image/scenedetect/__init__.py	/^def output_scene_list(csv_file, smgr, scene_list_tc, scene_start_sec,$/;"	kind:function	line:378
+output_scene_list	2. Movie to Image/scenedetect/__init__.py	/^def output_scene_list(csv_file, smgr, scene_list_tc, scene_start_sec,$/;"	kind:function	line:400
 params	1. Cognitive API/vision.py	/^params = { 'visualFeatures' : 'Categories, Tags, Description, Faces, ImageType, Color, Adult' }$/;"	kind:variable	line:59
 pathToFileInDisk	1. Cognitive API/vision.py	/^pathToFileInDisk = r'C:\\Temp\\untitled.png'$/;"	kind:variable	line:55
 platform	2. Movie to Image/scenedetect/__init__.py	/^import scenedetect.platform$/;"	kind:namespace	line:39
@@ -99,7 +99,7 @@ process_frame	2. Movie to Image/scenedetect/detectors.py	/^    def process_frame
 process_frame	2. Movie to Image/scenedetect/detectors.py	/^    def process_frame(self, frame_num, frame_img, frame_metrics, scene_list):$/;"	kind:member	line:60
 requests	1. Cognitive API/vision.py	/^import requests$/;"	kind:namespace	line:2
 result	1. Cognitive API/vision.py	/^result = processRequest( json, data, headers, params )$/;"	kind:variable	line:67
-save_preview_images	2. Movie to Image/scenedetect/__init__.py	/^def save_preview_images(image_path_prefix, im_curr, im_last, num_scenes):$/;"	kind:function	line:264
+save_preview_images	2. Movie to Image/scenedetect/__init__.py	/^def save_preview_images(image_path_prefix, im_curr, im_last, num_scenes):$/;"	kind:function	line:286
 scenedetect	2. Movie to Image/api_test.py	/^import scenedetect$/;"	kind:namespace	line:13
 scenedetect	2. Movie to Image/api_test.py	/^import scenedetect.detectors$/;"	kind:namespace	line:14
 scenedetect	2. Movie to Image/api_test.py	/^import scenedetect.manager$/;"	kind:namespace	line:15
@@ -111,7 +111,7 @@ scenedetect	2. Movie to Image/scenedetect/__init__.py	/^import scenedetect.timec
 scenedetect	2. Movie to Image/scenedetect/__main__.py	/^    import scenedetect$/;"	kind:namespace	line:39
 scenedetect	2. Movie to Image/scenedetect/cli.py	/^import scenedetect$/;"	kind:namespace	line:34
 scenedetect	2. Movie to Image/scenedetect/manager.py	/^import scenedetect.detectors$/;"	kind:namespace	line:35
-split_input_video	2. Movie to Image/scenedetect/__init__.py	/^def split_input_video(input_path, output_path, timecode_list_str):$/;"	kind:function	line:355
+split_input_video	2. Movie to Image/scenedetect/__init__.py	/^def split_input_video(input_path, output_path, timecode_list_str):$/;"	kind:function	line:377
 string	2. Movie to Image/scenedetect/cli.py	/^import string$/;"	kind:namespace	line:31
 string_type_check	2. Movie to Image/scenedetect/cli.py	/^def string_type_check(valid_strings, case_sensitive = True, metavar = None):$/;"	kind:function	line:165
 subprocess	2. Movie to Image/scenedetect/__init__.py	/^import subprocess$/;"	kind:namespace	line:36
