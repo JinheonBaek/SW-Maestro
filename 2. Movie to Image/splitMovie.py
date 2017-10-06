@@ -25,7 +25,7 @@ def main():
     content_detector = scenedetect.detectors.ContentDetector()
 
     # Set SceneManager
-    smgr = scenedetect.manager.SceneManager(detector = content_detector, save_images = True)
+    smgr = scenedetect.manager.SceneManager(detector = content_detector, save_images = True, frame_skip = 1)
     #smgr = scenedetect.manager.SceneManager(detector = content_detector, save_images = False)
 
     # Above this is setting scenedetect
