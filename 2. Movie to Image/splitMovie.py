@@ -23,6 +23,7 @@ def main():
 
     # Set mode of detector
     content_detector = scenedetect.detectors.ContentDetector()
+    threshold_detector = scenedetect.detectors.ThresholdDetector()
 
     # Set SceneManager
     smgr = scenedetect.manager.SceneManager(detector = content_detector, save_images = True, frame_skip = 1)
