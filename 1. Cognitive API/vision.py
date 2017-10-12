@@ -52,6 +52,7 @@ data = None
 '''
 
 # Load raw image file into memory
+
 pathToFileInDisk = r'C:\Temp\untitled.png'
 with open ( pathToFileInDisk, 'rb' ) as f:
     data = f.read()
@@ -65,6 +66,7 @@ headers['Ocp-Apim-Subscription-Key'] = _key
 json = None
 
 result = processRequest( json, data, headers, params )
+
 
 
 # print result
