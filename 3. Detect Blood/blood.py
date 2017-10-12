@@ -28,44 +28,57 @@ class BloodColorDetector(BloodDetector):
     def process(self, img):
         self.img = img
         count = 0
-
+        print("Process Image", self.img.size)
         # Iterate pixel of image
         for p in self.img:
+            #print(p)
+            #print(self.img.xy_array[p.x][p.y])
             if (
-                p.red >= self.BR_threshold['red'][0] & 
-                p.red <= self.BR_threshold['red'][1] &
-                p.green >= self.BR_threshold['green'][0] &
-                p.green <= self.BR_threshold['green'][1] &
-                p.blue >= self.BR_threshold['blue'][0] &
-                p.blue <= self.BR_threshold['blue'][1] ) :
+                (p.red >= self.BR_threshold['red'][0]) & 
+                (p.red <= self.BR_threshold['red'][1]) &
+                (p.green >= self.BR_threshold['green'][0]) &
+                (p.green <= self.BR_threshold['green'][1]) &
+                (p.blue >= self.BR_threshold['blue'][0]) &
+                (p.blue <= self.BR_threshold['blue'][1]) ) :
+                print(p)
                 if (self.check_color_distribution_depth(p.x, p.y)) :
                     count += 1
+                    p.red = 255
+                    p.green = 255
+                    p.blue = 255
 
             elif (
-                p.red >= self.DR_threshold['red'][0] & 
-                p.red <= self.DR_threshold['red'][1] &
-                p.green >= self.DR_threshold['green'][0] &
-                p.green <= self.DR_threshold['green'][1] &
-                p.blue >= self.DR_threshold['blue'][0] &
-                p.blue <= self.DR_threshold['blue'][1] ) :
+                (p.red >= self.DR_threshold['red'][0]) & 
+                (p.red <= self.DR_threshold['red'][1]) &
+                (p.green >= self.DR_threshold['green'][0]) &
+                (p.green <= self.DR_threshold['green'][1]) &
+                (p.blue >= self.DR_threshold['blue'][0]) &
+                (p.blue <= self.DR_threshold['blue'][1]) &
+                (abs(p.green - p.blue) <= 8) ) :
                 if (self.check_color_distribution_depth(p.x, p.y)) :
                     count += 1
+                    p.red = 255
+                    p.green = 255
+                    p.blue = 255
         
+        self.img.show()
+
         return count / (img.width * img.height)
 
     def check_color_distribution_depth(self, x, y):
         count = 0
-        for i in range(-2, 3):
-            for j in range(-2, 3):
-                if (x + i < 0 | y + i < 0):
+        return True
+        for j in range(-2, 3):
+            for i in range(-2, 3):
+                if (x + i < 0 | y + j < 0):
                     break
-                elif ((x + i >= self.img.height - 1) | (y + j >= self.img.width - 1)):
+                elif ((x + i >= self.img.height) | (y + j >= self.img.width)):
                     break
                 if (np.all(self.img.xy_array[x][y]) == np.all(self.img.xy_array[x + i][y + j])):
                     count += 1
         
-        if count >= 3:
-            return False
-        
+            if count >= 3:
+                return False
+
         return True
-                
+
