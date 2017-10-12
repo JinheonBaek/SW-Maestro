@@ -5,6 +5,8 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 AboutAction	2. Movie to Image/scenedetect/cli.py	/^class AboutAction(argparse.Action):$/;"	kind:class	line:200
+BloodColorDetector	3. Detect Blood/blood.py	/^class BloodColorDetector(BloodDetector):$/;"	kind:class	line:11
+BloodDetector	3. Detect Blood/blood.py	/^class BloodDetector(object):$/;"	kind:class	line:3
 ContentDetector	2. Movie to Image/scenedetect/detectors.py	/^class ContentDetector(SceneDetector):$/;"	kind:class	line:239
 DETECTOR_DEFAULT	2. Movie to Image/scenedetect/detectors.py	/^DETECTOR_DEFAULT = 'threshold'$/;"	kind:variable	line:37
 FORMAT_DEFAULT	2. Movie to Image/scenedetect/timecodes.py	/^FORMAT_DEFAULT = 'standard'$/;"	kind:variable	line:244
@@ -24,6 +26,8 @@ __init__	2. Movie to Image/scenedetect/detectors.py	/^    def __init__(self, thr
 __init__	2. Movie to Image/scenedetect/detectors.py	/^    def __init__(self, threshold = 30.0, min_scene_len = 15):$/;"	kind:member	line:247
 __init__	2. Movie to Image/scenedetect/manager.py	/^    def __init__(self, args = None, detector = None,$/;"	kind:member	line:48
 __init__	2. Movie to Image/scenedetect/timecodes.py	/^    def __init__(self, timecode = None, fps = None, new_time = None):$/;"	kind:member	line:60
+__init__	3. Detect Blood/blood.py	/^    def __init__(self):$/;"	kind:member	line:4
+__init__	3. Detect Blood/blood.py	/^    def __init__(self, BR_threshold = None, DR_threshold = None):$/;"	kind:member	line:12
 __init__.py	2. Movie to Image/scenedetect/__init__.py	1;"	kind:file	line:1
 __main__.py	2. Movie to Image/scenedetect/__main__.py	1;"	kind:file	line:1
 __sub__	2. Movie to Image/scenedetect/timecodes.py	/^    def __sub__(self, other):$/;"	kind:member	line:175
@@ -39,6 +43,8 @@ _type_checker	2. Movie to Image/scenedetect/cli.py	/^    def _type_checker(value
 _url	1. Cognitive API/vision.py	/^_url = "https:\/\/westus.api.cognitive.microsoft.com\/vision\/v1.0\/analyze"$/;"	kind:variable	line:5
 argparse	2. Movie to Image/scenedetect/__init__.py	/^import argparse$/;"	kind:namespace	line:33
 argparse	2. Movie to Image/scenedetect/cli.py	/^import argparse$/;"	kind:namespace	line:30
+blood	3. Detect Blood/main.py	/^import blood$/;"	kind:namespace	line:1
+blood.py	3. Detect Blood/blood.py	1;"	kind:file	line:1
 clear	2. Movie to Image/scenedetect/manager.py	/^    def clear(self):$/;"	kind:member	line:118
 cli	2. Movie to Image/scenedetect/__init__.py	/^import scenedetect.cli$/;"	kind:namespace	line:43
 cli.py	2. Movie to Image/scenedetect/cli.py	1;"	kind:file	line:1
@@ -52,6 +58,7 @@ data	1. Cognitive API/vision.py	/^    data = f.read()$/;"	kind:variable	line:58
 detect_scenes	2. Movie to Image/scenedetect/__init__.py	/^def detect_scenes(cap, scene_manager, start_frame,$/;"	kind:function	line:148
 detect_scenes	2. Movie to Image/scenedetect/manager.py	/^    def detect_scenes(self, input_video = None):$/;"	kind:member	line:122
 detect_scenes_file	2. Movie to Image/scenedetect/__init__.py	/^def detect_scenes_file(path, scene_manager):$/;"	kind:function	line:76
+detector	3. Detect Blood/main.py	/^detector = blood.BloodColorDetector()$/;"	kind:variable	line:5
 detectors	2. Movie to Image/scenedetect/__init__.py	/^import scenedetect.detectors$/;"	kind:namespace	line:40
 detectors	2. Movie to Image/scenedetect/manager.py	/^import scenedetect.detectors$/;"	kind:namespace	line:35
 detectors	2. Movie to Image/splitMovie.py	/^import scenedetect.detectors$/;"	kind:namespace	line:14
@@ -67,14 +74,18 @@ get_seconds	2. Movie to Image/scenedetect/timecodes.py	/^    def get_seconds(sel
 get_string	2. Movie to Image/scenedetect/timecodes.py	/^def get_string(time_msec, show_msec = True):$/;"	kind:function	line:266
 get_timecode	2. Movie to Image/scenedetect/timecodes.py	/^    def get_timecode(self, precision = 3, use_rounding = True):$/;"	kind:member	line:197
 headers	1. Cognitive API/vision.py	/^headers = dict()$/;"	kind:variable	line:62
+img	3. Detect Blood/main.py	/^img = novice.open('img\/test.jpg')$/;"	kind:variable	line:4
 int_type_check	2. Movie to Image/scenedetect/cli.py	/^def int_type_check(min_val, max_val = None, metavar = None):$/;"	kind:function	line:98
 json	1. Cognitive API/vision.py	/^json = None$/;"	kind:variable	line:66
 main	2. Movie to Image/scenedetect/__init__.py	/^def main():$/;"	kind:function	line:285
 main	2. Movie to Image/splitMovie.py	/^def main():$/;"	kind:function	line:18
+main.py	3. Detect Blood/main.py	1;"	kind:file	line:1
 manager	2. Movie to Image/scenedetect/__init__.py	/^import scenedetect.manager$/;"	kind:namespace	line:42
 manager	2. Movie to Image/splitMovie.py	/^import scenedetect.manager$/;"	kind:namespace	line:15
 manager.py	2. Movie to Image/scenedetect/manager.py	1;"	kind:file	line:1
 math	2. Movie to Image/scenedetect/timecodes.py	/^import math$/;"	kind:namespace	line:28
+novice	3. Detect Blood/blood.py	/^from skimage import novice$/;"	kind:namespace	line:1
+novice	3. Detect Blood/main.py	/^from skimage import novice$/;"	kind:namespace	line:2
 numpy	2. Movie to Image/scenedetect/__init__.py	/^import numpy$/;"	kind:namespace	line:51
 numpy	2. Movie to Image/scenedetect/detectors.py	/^import numpy$/;"	kind:namespace	line:32
 os	2. Movie to Image/scenedetect/__init__.py	/^import os$/;"	kind:namespace	line:32
@@ -91,6 +102,8 @@ print_function	2. Movie to Image/scenedetect/__init__.py	/^from __future__ impor
 print_function	2. Movie to Image/scenedetect/cli.py	/^from __future__ import print_function$/;"	kind:namespace	line:28
 print_function	2. Movie to Image/scenedetect/manager.py	/^from __future__ import print_function$/;"	kind:namespace	line:32
 print_function	2. Movie to Image/splitMovie.py	/^from __future__ import print_function$/;"	kind:namespace	line:11
+process	3. Detect Blood/blood.py	/^    def process(self):$/;"	kind:member	line:8
+process	3. Detect Blood/blood.py	/^    def process(self, img):$/;"	kind:member	line:25
 processRequest	1. Cognitive API/vision.py	/^def processRequest( json, data, headers, params ):$/;"	kind:function	line:9
 process_frame	2. Movie to Image/scenedetect/detectors.py	/^    def process_frame(self, frame_num, frame_img, frame_metrics, scene_list):$/;"	kind:member	line:168
 process_frame	2. Movie to Image/scenedetect/detectors.py	/^    def process_frame(self, frame_num, frame_img, frame_metrics, scene_list):$/;"	kind:member	line:255
