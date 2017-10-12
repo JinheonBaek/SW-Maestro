@@ -57,9 +57,9 @@ class BloodColorDetector(BloodDetector):
         count = 0
         for i in range(-2, 3):
             for j in range(-2, 3):
-                if (x + i < 0 & y + i < 0):
+                if (x + i < 0 | y + i < 0):
                     break
-                elif (x + i > self.img.width & y + i < self.img.height):
+                elif ((x + i >= self.img.height - 1) | (y + j >= self.img.width - 1)):
                     break
                 if (np.all(self.img.xy_array[x][y]) == np.all(self.img.xy_array[x + i][y + j])):
                     count += 1
