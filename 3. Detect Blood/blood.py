@@ -43,9 +43,7 @@ class BloodColorDetector(BloodDetector):
                 print(p)
                 if (self.check_color_distribution_depth(p.x, p.y)) :
                     count += 1
-                    p.red = 255
-                    p.green = 255
-                    p.blue = 255
+                    self.make_mark(p)
 
             elif (
                 (p.red >= self.DR_threshold['red'][0]) & 
@@ -57,9 +55,7 @@ class BloodColorDetector(BloodDetector):
                 (abs(p.green - p.blue) <= 8) ) :
                 if (self.check_color_distribution_depth(p.x, p.y)) :
                     count += 1
-                    p.red = 255
-                    p.green = 255
-                    p.blue = 255
+                    self.make_mark(p)
         
         self.img.show()
 
@@ -82,3 +78,7 @@ class BloodColorDetector(BloodDetector):
 
         return True
 
+    def make_mark(self, p):
+        p.red = 255
+        p.green = 255
+        p.blue = 255
