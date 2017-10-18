@@ -269,7 +269,7 @@ def detect_scenes(cap, scene_manager, start_frame,
 
     # perform any post-processing required by the detectors being used
     for detector in scene_manager.detector_list:
-        detector.post_process(scene_manager.scene_list + 1, frames_read)
+        detector.post_process(scene_manager.scene_list, frames_read)
 
     if start_frame.get_frames() > 0:
         frames_read -= start_frame.get_frames()

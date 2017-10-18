@@ -32,7 +32,7 @@ def main():
     # Above this is setting scenedetect
 
     # Scene detect
-    scenedetect.detect_scenes_file("./video/my_video.mp4", smgr)
+    scenedetect.detect_scenes_file("./video/fi1_xvid.avi", smgr)
 
     # Print
     print("Detected %d scenes in video (algorithm = content, threshold = default)." % (len(smgr.scene_list)))
