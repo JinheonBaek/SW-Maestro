@@ -31,8 +31,6 @@ class BloodColorDetector(BloodDetector):
         print("Process Image", self.img.size)
         # Iterate pixel of image
         for p in self.img:
-            #print(p)
-            #print(self.img.xy_array[p.x][p.y])
             if (
                 (p.red >= self.BR_threshold['red'][0]) & 
                 (p.red <= self.BR_threshold['red'][1]) &
@@ -40,7 +38,6 @@ class BloodColorDetector(BloodDetector):
                 (p.green <= self.BR_threshold['green'][1]) &
                 (p.blue >= self.BR_threshold['blue'][0]) &
                 (p.blue <= self.BR_threshold['blue'][1]) ) :
-                print(p)
                 if (self.check_color_distribution_depth(p.x, p.y)) :
                     count += 1
                     self.make_mark(p)
@@ -63,7 +60,7 @@ class BloodColorDetector(BloodDetector):
 
     def check_color_distribution_depth(self, x, y):
         count = 0
-        return True
+
         for j in range(-2, 3):
             for i in range(-2, 3):
                 if (x + i < 0 | y + j < 0):
@@ -72,8 +69,8 @@ class BloodColorDetector(BloodDetector):
                     break
                 if (np.all(self.img.xy_array[x][y]) == np.all(self.img.xy_array[x + i][y + j])):
                     count += 1
-        
-            if count >= 3:
+
+            if count >= 25:
                 return False
 
         return True
