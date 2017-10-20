@@ -68,7 +68,5 @@ json = None
 
 result = processRequest( json, data, headers, params )
 
-
-
 # print result
 print(result)
