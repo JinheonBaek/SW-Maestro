@@ -298,6 +298,8 @@ class ContentDetector(SceneDetector):
                     scene_list.append(frame_num)
                     self.last_scene_cut = frame_num
                     cut_detected = True
+                    
+                    print("Found", len(scene_list), "cut", "In", scene_list[len(scene_list)-1], "frame")
 
             #self.last_frame.release()
             del self.last_frame
