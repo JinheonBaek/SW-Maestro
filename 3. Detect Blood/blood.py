@@ -33,13 +33,13 @@ class BloodColorDetector(BloodDetector):
         self.img_height, self.img_width, self.img_channels = img.shape
         count_test = 0
         count = 0
-        print("Process Image", self.img.size)
+        print("Process Image {0} * {1}".format(self.img_width, self.img_height))
         
         # Iterate pixel of image
         for i in range(self.img_height):
             for j in range(self.img_width):
                 red, green, blue = self.img[i, j]
-                
+
                 if (
                     (red >= self.BR_threshold['red'][0]) & 
                     (red <= self.BR_threshold['red'][1]) &
