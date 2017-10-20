@@ -1,9 +1,10 @@
 import time
 import requests
+import cv2
 
 # Variables
 _url = "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze"
-_key = "cdd85ae8d3a448568e51d611ef9591ec"
+_key = "194ed79e69f9455f8c105258da687286"
 _maxNumRetries = 3
 
 def processRequest( json, data, headers, params ):
@@ -52,10 +53,10 @@ data = None
 '''
 
 # Load raw image file into memory
-
-pathToFileInDisk = r'C:\Temp\untitled.png'
-with open ( pathToFileInDisk, 'rb' ) as f:
-    data = f.read()
+img = cv2.imread(r"C:\Temp\untitled.png")
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+r, buf = cv2.imencode(".png", img)
+data = bytearray(buf)
 
 params = { 'visualFeatures' : 'Categories, Tags, Description, Faces, ImageType, Color, Adult' }
 
