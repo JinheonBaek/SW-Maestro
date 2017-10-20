@@ -247,7 +247,7 @@ def detect_scenes(cap, scene_manager, start_frame,
             img_name = 0
         
         # Save video frame image
-        if True:
+        if scene_manager.save_images:
             save_image(len(scene_manager.scene_list) + 1, img_name, im_cap)
 
         # periodically show processing speed/performance if requested

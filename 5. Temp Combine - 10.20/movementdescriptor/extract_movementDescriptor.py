@@ -18,7 +18,6 @@ def MBM(path = None, filename = None):
     sub_row, sub_col = int(set_video_height/15), int(set_video_width/15)
 
     frames = np.zeros((frame_num, int(set_video_height), int(set_video_width)))
-    print(frames.shape)
 
     # Load all frames of video & convert frame to extract flows
     for i in range(frame_num):
