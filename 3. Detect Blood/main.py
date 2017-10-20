@@ -1,6 +1,6 @@
 import blood
-from skimage import novice
+import cv2
 
-img = novice.open('img/test.jpg')
+img = cv2.imread("img/test.jpg")
 detector = blood.BloodColorDetector()
 print(detector.process(img))

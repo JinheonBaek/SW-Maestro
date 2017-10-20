@@ -1,4 +1,4 @@
-from skimage import novice
+import cv2
 import numpy as np
 
 class BloodDetector(object):
@@ -12,6 +12,9 @@ class BloodDetector(object):
 class BloodColorDetector(BloodDetector):
     def __init__(self, BR_threshold = None, DR_threshold = None):
         self.img = None
+        self.img_height = None
+        self.img_width = None
+        self.img_channels = None
 
         # Bright Red Blood Range
         if BR_threshold == None:
@@ -26,37 +29,38 @@ class BloodColorDetector(BloodDetector):
             self.DR_threshold = DR_threshold
 
     def process(self, img):
-        self.img = img
+        self.img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        self.img_height, self.img_width, self.img_channels = img.shape
+        count_test = 0
         count = 0
         print("Process Image", self.img.size)
-        # Iterate pixel of image
-        for p in self.img:
-            if (
-                (p.red >= self.BR_threshold['red'][0]) & 
-                (p.red <= self.BR_threshold['red'][1]) &
-                (p.green >= self.BR_threshold['green'][0]) &
-                (p.green <= self.BR_threshold['green'][1]) &
-                (p.blue >= self.BR_threshold['blue'][0]) &
-                (p.blue <= self.BR_threshold['blue'][1]) ) :
-                if (self.check_color_distribution_depth(p.x, p.y)) :
-                    count += 1
-                    self.make_mark(p)
-
-            elif (
-                (p.red >= self.DR_threshold['red'][0]) & 
-                (p.red <= self.DR_threshold['red'][1]) &
-                (p.green >= self.DR_threshold['green'][0]) &
-                (p.green <= self.DR_threshold['green'][1]) &
-                (p.blue >= self.DR_threshold['blue'][0]) &
-                (p.blue <= self.DR_threshold['blue'][1]) &
-                (abs(p.green - p.blue) <= 8) ) :
-                if (self.check_color_distribution_depth(p.x, p.y)) :
-                    count += 1
-                    self.make_mark(p)
         
-        self.img.show()
-
-        return count / (img.width * img.height)
+        # Iterate pixel of image
+        for i in range(self.img_height):
+            for j in range(self.img_width):
+                red, green, blue = self.img[i, j]
+                
+                if (
+                    (red >= self.BR_threshold['red'][0]) & 
+                    (red <= self.BR_threshold['red'][1]) &
+                    (green >= self.BR_threshold['green'][0]) &
+                    (green <= self.BR_threshold['green'][1]) &
+                    (blue >= self.BR_threshold['blue'][0]) &
+                    (blue <= self.BR_threshold['blue'][1]) ) :
+                    if (self.check_color_distribution_depth(i, j)) :
+                        count += 1
+                elif (
+                    (red >= self.DR_threshold['red'][0]) & 
+                    (red <= self.DR_threshold['red'][1]) &
+                    (green >= self.DR_threshold['green'][0]) &
+                    (green <= self.DR_threshold['green'][1]) &
+                    (blue >= self.DR_threshold['blue'][0]) &
+                    (blue <= self.DR_threshold['blue'][1]) &
+                    (abs(int(green) - int(blue)) <= 8) ) :
+                    if (self.check_color_distribution_depth(i, j)) :
+                        count += 1
+        
+        return count / (self.img_width * self.img_height)
 
     def check_color_distribution_depth(self, x, y):
         count = 0
@@ -65,17 +69,12 @@ class BloodColorDetector(BloodDetector):
             for i in range(-2, 3):
                 if (x + i < 0 | y + j < 0):
                     break
-                elif ((x + i >= self.img.height) | (y + j >= self.img.width)):
+                elif ((x + i >= self.img_width) | (y + j >= self.img_height)):
                     break
-                if (np.all(self.img.xy_array[x][y]) == np.all(self.img.xy_array[x + i][y + j])):
+                if (np.all(self.img[x, y]) == np.all(self.img[x + i, y + j])):
                     count += 1
 
             if count >= 25:
                 return False
 
         return True
-
-    def make_mark(self, p):
-        p.red = 255
-        p.green = 255
-        p.blue = 255
