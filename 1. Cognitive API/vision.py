@@ -53,12 +53,11 @@ data = None
 '''
 
 # Load raw image file into memory
-img = cv2.imread(r"C:\Temp\untitled.png")
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img = cv2.imread(r"C:\Users\Jinhe\Desktop\images.jpg")
 r, buf = cv2.imencode(".png", img)
 data = bytearray(buf)
 
-params = { 'visualFeatures' : 'Categories, Tags, Description, Faces, ImageType, Color, Adult' }
+params = { 'visualFeatures' : 'Adult' }
 
 headers = dict()
 headers['Content-Type'] = 'application/octet-stream'
