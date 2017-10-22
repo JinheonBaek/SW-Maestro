@@ -11,7 +11,7 @@ cap.open(_path)
 set_video_width = 1280
 set_video_height = 720
 frame_num = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-print(frame_num)
+
 # number of features = sub_row * sub_col
 sub_row, sub_col = int(set_video_height/15), int(set_video_width/15)
 

@@ -53,7 +53,7 @@ data = None
 '''
 
 # Load raw image file into memory
-img = cv2.imread(r"C:\Users\Jinhe\Desktop\images.jpg")
+img = cv2.imread(r"C:\SW-Maestro\1. Cognitive API\images.jpg")
 r, buf = cv2.imencode(".png", img)
 data = bytearray(buf)
 
